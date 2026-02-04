@@ -1,9 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
+static const unsigned int baralpha[]    = { 0xFF, 0xFF };
+static const unsigned int borderalpha[] = { 0xFF, 0xFF };
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int vertpad = 28;  /* vertical padding for eww bar */
+static const int sidepad = 0;   /* horizontal padding */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
@@ -12,12 +18,22 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#fb7e14";
+static const char col_cyan[]        = "#14c9fb";
+static const char col_green[] 	    = "#11F511";
+static const char col_black[]	    = "#000000";
+static const char col_lightgray[]   = "#556155";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_cyan, col_lightgray, col_gray4 },
+	[SchemeSel]  = { col_cyan, col_lightgray,  col_gray4  },
 };
+
+static const unsigned int alphas[][3] = {
+    /*               fg        bg           border */
+    [SchemeNorm] = { 0xFF, baralpha[0], borderalpha[0] },
+    [SchemeSel]  = { 0xFF, baralpha[0], borderalpha[0] },
+};
+
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5" };
@@ -62,6 +78,17 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+/* volume */
+static const char *volup[]   = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *voldown[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *volmute[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+
+/* brightness */
+static const char *brightup[]   = { "brightnessctl", "set", "10%+", NULL };
+static const char *brightdown[] = { "brightnessctl", "set", "10%-", NULL };
+
+
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -87,6 +114,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volup } },
+	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = voldown } },
+	{ 0, XF86XK_AudioMute,        spawn, {.v = volmute } },
+	{ 0, XF86XK_MonBrightnessUp,   spawn, {.v = brightup } },
+	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = brightdown } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
