@@ -12,8 +12,8 @@ static const int vertpad = 28;  /* vertical padding for eww bar */
 static const int sidepad = 0;   /* horizontal padding */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "Jet Brains Mono:size=10" };
+static const char dmenufont[]       = "Jet Brains Mono:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
