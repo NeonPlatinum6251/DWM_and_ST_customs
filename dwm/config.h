@@ -21,11 +21,20 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#14c9fb";
 static const char col_green[] 	    = "#11F511";
 static const char col_black[]	    = "#000000";
-static const char col_lightgray[]   = "#556155";
+static const char col_lightgray[]   = "#A8BABA";
+static const char col_dark_purp[]   = "#1f1a22";
+static const char col_light_cream[] = "#f2e9e4";
+static const char col_dust_pink[]   = "#e8b4b8";
+static const char col_light_purp[]  = "#cdb4db";
+static const char col_light_orange[]= "#e9d8a6";
+static const char col_bg[]          = "#1b1f2a";
+static const char col_alt[]         = "#232838";
+static const char col_fg[]          = "#e6edf3";
+static const char col_blue[]        = "#4f86c6";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_cyan, col_lightgray, col_gray4 },
-	[SchemeSel]  = { col_cyan, col_lightgray,  col_gray4  },
+	[SchemeNorm] = { col_fg, col_bg, col_alt },
+	[SchemeSel]  = { col_bg, col_blue,  col_blue },
 };
 
 static const unsigned int alphas[][3] = {
