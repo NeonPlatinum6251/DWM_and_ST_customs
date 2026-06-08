@@ -77,6 +77,17 @@ static int bellvolume = 0;
 char *termname = "st-256color";
 
 /*
+ * Open urls starting with urlprefixes, containing urlchars
+ * by passing as ARG1 to urlhandler.
+ */
+char *urlhandler = "xdg-open";
+char urlchars[] =
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	"abcdefghijklmnopqrstuvwxyz"
+	"0123456789-._~:/?#@!$&'*+,;=%";
+char *urlprefixes[] = {"http://", "https://", NULL};
+
+/*
  * spaces per tab
  *
  * When you are changing this value, don't forget to adapt the »it« value in
